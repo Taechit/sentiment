@@ -1,3 +1,7 @@
-import deepcut
-list_word = deepcut.tokenize('ตัดคำได้ดีมาก')
-print(list_word)
+from pythainlp.tokenize import word_tokenize
+text='ที่เปิดปีโป้เค้าเรียกว่า อะไรเหรอคะ ที่เป็นพลาสติก ปีโป้ เรียกยังไง'
+e=word_tokenize(text,engine='newmm') 
+for x in e : 
+    if x == " ":
+        e.remove(' ')
+print (e)  
