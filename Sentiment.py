@@ -6,4 +6,4 @@ for x in e :
         e.remove(' ')
 print (e)  
 #moomek
-
+#moo 2
