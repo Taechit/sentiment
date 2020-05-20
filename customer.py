@@ -1,2 +1,0 @@
-print('customer')
-print('Peter')
