@@ -42,6 +42,9 @@ def naiveBayes (word,training):
     classProbNeg = countNeg/len(training)
     print(classProbPos)
     print(classProbNeg)
+    bayesPos=1
+    bayesNeg=1
+
     for n in word : #วนลูปแต่ละคำใน word ที่เข้ามา
         print("word =",n)
         countWordPos = 0
@@ -53,15 +56,20 @@ def naiveBayes (word,training):
                 elif(x.count("Negative")):
                     countWordNeg = countWordNeg+1
         countWord = countWordPos + countWordNeg
-        print("CountPos",countWordPos,",All positive words =",countPos,",PosProb",countWordPos/countPos)
-        print("CountNeg",countWordNeg,",All negative words =",countNeg,",NegProb",countWordNeg/countNeg)
+        #countPos จำนวน positive ทั้งหมดที่มีใน trainingData
+        #countNeg จำนวน negative ทั้งหมดที่มีใน trainingData
+        print("Count posisitve of",n,"is",countWordPos,",All positive words =",countPos,",Ratio beetween",n,"and all positive word =",countWordPos/countPos)
+        print("Count negative of",n,"is",countWordNeg,",All negative words =",countNeg,",Ratio beetween",n,"and all negative word =",countWordNeg/countNeg)
         print("Probability of",n,"=",countWord/len(training)) 
         if(countWord/len(training)!=0):
-            somethingPos = ((countWordPos/countPos)*classProbPos)/countWord/len(training)
-            somethingNeg = ((countWordNeg/countNeg)*classProbNeg)/countWord/len(training)
-               
+            somethingPos = ((countWordPos/countPos)*classProbPos)/(countWord/len(training))
+            somethingNeg = ((countWordNeg/countNeg)*classProbNeg)/(countWord/len(training))
+            bayesPos = bayesPos*somethingPos
+            bayesNeg = bayesNeg*somethingNeg       
+        print("somethingPos =",bayesPos)
+        print("somethingNeg =",bayesNeg)
 
-textPeepo = ['ปีโป้โคตรไม่อร่อยยยย']
+textPeepo = ['ไม่อร่อย']
 for x in textPeepo :
     word = word_tokenize(x,engine='newmm')
     pattern = re.compile("[A-Za-z0-9/+*#!]+")
