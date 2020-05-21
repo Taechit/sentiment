@@ -43,14 +43,23 @@ def naiveBayes (word,training):
     print(classProbPos)
     print(classProbNeg)
     for n in word : #วนลูปแต่ละคำใน word ที่เข้ามา
-        print(n)
+        print("word =",n)
+        countWordPos = 0
+        countWordNeg = 0
         for x in training : 
-            countWordPos = 0
             if n == x[0] :
                 if(x.count("Positive")): 
                     countWordPos = countWordPos+1
-                    print(n , countWordPos )
-                
+                elif(x.count("Negative")):
+                    countWordNeg = countWordNeg+1
+        countWord = countWordPos + countWordNeg
+        print("CountPos",countWordPos,",All positive words =",countPos,",PosProb",countWordPos/countPos)
+        print("CountNeg",countWordNeg,",All negative words =",countNeg,",NegProb",countWordNeg/countNeg)
+        print("Probability of",n,"=",countWord/len(training)) 
+        if(countWord/len(training)!=0):
+            somethingPos = ((countWordPos/countPos)*classProbPos)/countWord/len(training)
+            somethingNeg = ((countWordNeg/countNeg)*classProbNeg)/countWord/len(training)
+               
 
 textPeepo = ['ปีโป้โคตรไม่อร่อยยยย']
 for x in textPeepo :
