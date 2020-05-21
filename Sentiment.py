@@ -66,12 +66,17 @@ def naiveBayes (word,training):
             somethingNeg = ((countWordNeg/countNeg)*classProbNeg)/(countWord/len(training))
             bayesPos = bayesPos*somethingPos
             bayesNeg = bayesNeg*somethingNeg       
-        print("somethingPos =",bayesPos)
-        print("somethingNeg =",bayesNeg)
+        print("bayesPos =",bayesPos)
+        print("bayesNeg =",bayesNeg)
+    if (abs(bayesPos-bayesNeg)<=0.1):
+        return("ให้ความรู้สึกธรรมด้าธรรมดา")
+    else:
+        if(bayesPos>bayesNeg): return("ให้ความรู้สึกที่ดี")
+        else : return("ให้ความรู้สึกไม่ดีเลย")
 
-textPeepo = ['ไม่อร่อย']
-for x in textPeepo :
-    word = word_tokenize(x,engine='newmm')
+textPeepo = ['ไม่ชอบ']
+for txt in textPeepo :
+    word = word_tokenize(txt,engine='newmm')
     pattern = re.compile("[A-Za-z0-9/+*#!]+")
     for x in word :
         if x == " ":
@@ -81,7 +86,8 @@ for x in textPeepo :
         elif len(x) >= 3:            
             if x[len(x)-1] == x[len(x)-2] and x[len(x)-2] == x[len(x)-3]:
                 word.remove(x)  
-    naiveBayes(word,trainingData)        
+    sentiment = naiveBayes(word,trainingData) 
+    print(txt,sentiment)      
 
 #x='หมู'
 #print(x.find('หมู'))
