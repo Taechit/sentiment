@@ -33,18 +33,25 @@ for x in training:
 def naiveBayes (word,training):
     countPos = 0
     countNeg = 0
+    
     print(word)
     for x in training :
         if(x.count("Positive")): countPos=countPos+1
         elif(x.count("Negative")): countNeg = countNeg+1
     classProbPos = countPos/len(training)
     classProbNeg = countNeg/len(training)
-    for word in word:
-        word.find(training[])
     print(classProbPos)
     print(classProbNeg)
+    for n in word : #วนลูปแต่ละคำใน word ที่เข้ามา
+        print(n)
+        for x in training : 
+            countWordPos = 0
+            if n == x[0] :
+                if(x.count("Positive")): 
+                    countWordPos = countWordPos+1
+                    print(n , countWordPos )
+                
 
-#
 textPeepo = ['ปีโป้โคตรไม่อร่อยยยย']
 for x in textPeepo :
     word = word_tokenize(x,engine='newmm')
