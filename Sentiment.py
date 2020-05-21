@@ -43,6 +43,6 @@ for x in textPeepo :
         elif len(x) >= 3:            
             if x[len(x)-1] == x[len(x)-2] and x[len(x)-2] == x[len(x)-3]:
                 word.remove(x)          
-#print(trainingData[4][0])
+
 #x='หมู'
 #print(x.find('หมู'))
