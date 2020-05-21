@@ -73,7 +73,7 @@ def sentimentAnalized (filePeepo,trainingData):
         rank = rank+ranking
         print(round,")",txt,'\n',"-->",sentiment)
         round=round+1      
-    print("Good : ",rank/len(textPeepo)*100,'%')
+    print("คนพูดถึงในทางที่ดี : ",rank/len(textPeepo)*100,'%')
 
 def readFile(sorce):
     #อ่านไฟล์ 
