@@ -1,3 +1,6 @@
+#!/usr/local/bin/python
+# -*- coding: utf-8 -*-
+import os, sys
 from pythainlp.tokenize import word_tokenize
 import codecs
 import re 
@@ -74,7 +77,7 @@ def naiveBayes (word,training):
         if(bayesPos>bayesNeg): return("ให้ความรู้สึกที่ดี")
         else : return("ให้ความรู้สึกไม่ดีเลย")
 
-textPeepo = ['ไม่ชอบ']
+textPeepo = ['คืองี้นะ รู้แหละแบบใหม่มีขายแยกสี แต่ๆๆ อิชั้นยังอยากมีโมเม้น ถุงนี้จะได้สีไหนเท่าไหร่บ้างนะ แต่มันก็ต้องมีครบทุกสีแหละถูกม่ะ ละจะเลือกถุงที่มีสีที่ชอบเยอะๆ ไปถึงชั้นขายของนับร้อยถุงตรงหน้า ไม่มีสีเขียวเลย ไม่มีเลยอ่ะ บางถุงมีสองสี แม๊ ได้อ่อ ประเด็นคืองงตัวเอง ดราม่าทำไม #ปีโป้']
 for txt in textPeepo :
     word = word_tokenize(txt,engine='newmm')
     pattern = re.compile("[A-Za-z0-9/+*#!]+")
