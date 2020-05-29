@@ -5,7 +5,7 @@ from pythainlp.tokenize import word_tokenize
 import codecs
 import re 
 
-#method สำหรับแยกคำ
+#สำหรับแยกคำ
 def stringSplit(txt):
     pos = txt.rfind(',')
     return txt[:pos-1],txt[pos+1:]
@@ -58,9 +58,12 @@ def sentimentAnalized (filePeepo,trainingData):
     textPeepo = filePeepo
     round=1
     rank = 0
+    print(textPeepo)
     for txt in textPeepo :
+        #txt.replace(" ", "")
+        re.sub(' +','',txt)
         word = word_tokenize(txt,engine='newmm')
-        pattern = re.compile("[A-Za-z0-9/+*#!]+")
+        pattern = re.compile("[A-Za-z0-9/+*!#]+")
         for x in word :
             if x == " ":
                 word.remove(x) #ลบข่องว่างออก
@@ -69,11 +72,14 @@ def sentimentAnalized (filePeepo,trainingData):
             elif len(x) >= 3:            
                 if x[len(x)-1] == x[len(x)-2] and x[len(x)-2] == x[len(x)-3]:
                     word.remove(x)  
-        sentiment ,ranking= naiveBayes(word,trainingData) 
+        sentiment ,ranking,countd,countda,countnotd  = naiveBayes(word,trainingData) 
+        countReald= countReald + countd
+        countRealda= countRealda + countda
+        countRealNotD = countRealNotD + countnotd
         rank = rank+ranking
         print(round,")",txt,'\n',"-->",sentiment)
-        round=round+1      
-    print("คนพูดถึงในทางที่ดี : ",rank/len(textPeepo)*100,'%')
+        round=round+1
+    print("คนพูดถึงในทางที่ดี : ",rank/len(textPeepo)*100,'%','count of good =',countReald,' count of neutral =',countRealda,' count of not good =',countRealNotD, )
 
 def readFile(sorce):
     #อ่านไฟล์ 
@@ -115,5 +121,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-#x='หมู'
-#print(x.find('หมู'))
