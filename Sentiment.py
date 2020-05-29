@@ -5,7 +5,7 @@ from pythainlp.tokenize import word_tokenize
 import codecs
 import re 
 
-#method สำหรับแยกคำ
+#สำหรับแยกคำ
 def stringSplit(txt):
     pos = txt.rfind(',')
     return txt[:pos-1],txt[pos+1:]
@@ -62,15 +62,21 @@ def sentimentAnalized (filePeepo,trainingData):
     textPeepo = filePeepo
     round=1
     rank = 0
+<<<<<<< HEAD
     countd=0
     countda=0
     countnotd=0
     countReald = 0
     countRealda =0
     countRealNotD =0
+=======
+    print(textPeepo)
+>>>>>>> master
     for txt in textPeepo :
+        #txt.replace(" ", "")
+        re.sub(' +','',txt)
         word = word_tokenize(txt,engine='newmm')
-        pattern = re.compile("[A-Za-z0-9/+*#!]+")
+        pattern = re.compile("[A-Za-z0-9/+*!#]+")
         for x in word :
             if x == " ":
                 word.remove(x) #ลบข่องว่างออก
@@ -85,7 +91,11 @@ def sentimentAnalized (filePeepo,trainingData):
         countRealNotD = countRealNotD + countnotd
         rank = rank+ranking
         print(round,")",txt,'\n',"-->",sentiment)
+<<<<<<< HEAD
         round=round+1      
+=======
+        round=round+1
+>>>>>>> master
     print("คนพูดถึงในทางที่ดี : ",rank/len(textPeepo)*100,'%','count of good =',countReald,' count of neutral =',countRealda,' count of not good =',countRealNotD, )
 
 def readFile(sorce):
@@ -128,5 +138,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-#x='หมู'
-#print(x.find('หมู'))
