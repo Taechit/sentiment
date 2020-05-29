@@ -14,7 +14,9 @@ def stringSplit(txt):
 def naiveBayes (word,training):
     countPos = 0
     countNeg = 0
-    
+    d =0
+    da = 0
+    notd = 0
     #print(word)
     for x in training :
         if(x.count("Positive")): countPos=countPos+1
@@ -48,16 +50,24 @@ def naiveBayes (word,training):
         #print("bayesPos =",bayesPos)
         #print("bayesNeg =",bayesNeg)
     if (abs(bayesPos-bayesNeg)<=0.1):
-        return("ให้ความรู้สึกธรรมด้าธรรมดา",0)
+        return("ให้ความรู้สึกธรรมด้าธรรมดา",0,0,1,0)
     else:
-        if(bayesPos>bayesNeg): return("ให้ความรู้สึกที่ดี",1)
-        else : return("ให้ความรู้สึกไม่ดีเลย",-1)
+        if(bayesPos>bayesNeg): 
+            return("ให้ความรู้สึกที่ดี",1,1,0,0)
+        else : 
+            return("ให้ความรู้สึกไม่ดีเลย",-1,0,0,1)
 
 #textPeepo = ['คืองี้นะ รู้แหละแบบใหม่มีขายแยกสี แต่ๆๆ อิชั้นยังอยากมีโมเม้น ถุงนี้จะได้สีไหนเท่าไหร่บ้างนะ แต่มันก็ต้องมีครบทุกสีแหละถูกม่ะ ละจะเลือกถุงที่มีสีที่ชอบเยอะๆ ไปถึงชั้นขายของนับร้อยถุงตรงหน้า ไม่มีสีเขียวเลย ไม่มีเลยอ่ะ บางถุงมีสองสี แม๊ ได้อ่อ ประเด็นคืองงตัวเอง ดราม่าทำไม #ปีโป้']
 def sentimentAnalized (filePeepo,trainingData):
     textPeepo = filePeepo
     round=1
     rank = 0
+    countd=0
+    countda=0
+    countnotd=0
+    countReald = 0
+    countRealda =0
+    countRealNotD =0
     for txt in textPeepo :
         word = word_tokenize(txt,engine='newmm')
         pattern = re.compile("[A-Za-z0-9/+*#!]+")
@@ -69,11 +79,14 @@ def sentimentAnalized (filePeepo,trainingData):
             elif len(x) >= 3:            
                 if x[len(x)-1] == x[len(x)-2] and x[len(x)-2] == x[len(x)-3]:
                     word.remove(x)  
-        sentiment ,ranking= naiveBayes(word,trainingData) 
+        sentiment ,ranking,countd,countda,countnotd  = naiveBayes(word,trainingData) 
+        countReald= countReald + countd
+        countRealda= countRealda + countda
+        countRealNotD = countRealNotD + countnotd
         rank = rank+ranking
         print(round,")",txt,'\n',"-->",sentiment)
         round=round+1      
-    print("คนพูดถึงในทางที่ดี : ",rank/len(textPeepo)*100,'%')
+    print("คนพูดถึงในทางที่ดี : ",rank/len(textPeepo)*100,'%','count of good =',countReald,' count of neutral =',countRealda,' count of not good =',countRealNotD, )
 
 def readFile(sorce):
     #อ่านไฟล์ 
